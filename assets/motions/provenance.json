@@ -1,0 +1,42 @@
+{
+  "tool": "built-in image_gen",
+  "references": [
+    "../../01_reference/inputs/ref1_character.png",
+    "../../01_reference/inputs/ref3_turnaround.png",
+    "../../01_reference/inputs/ref4_details.png"
+  ],
+  "sources": {
+    "idle": "E:/CodexState/generated_images/01a123cb-c7ec-7891-b65b-4635d47ee622/exec-0b045e35-3245-42a1-bd0c-9228d16bde78.png",
+    "wave": "E:/CodexState/generated_images/01a123cb-c7ec-7891-b65b-4635d47ee622/exec-a972e668-527f-43da-8417-f66f2e981258.png",
+    "walk": "E:/CodexState/generated_images/01a123cb-c7ec-7891-b65b-4635d47ee622/exec-6becd93e-0d6b-46ea-a0c4-47dde09e6b0a.png",
+    "cheer": "E:/CodexState/generated_images/01a123cb-c7ec-7891-b65b-4635d47ee622/exec-0c12a5af-5806-4825-b679-d8db4c3d2694.png",
+    "talk": "E:/CodexState/generated_images/01a123cb-c7ec-7891-b65b-4635d47ee622/exec-5b31d2e4-0692-4797-b399-00cde8bcc387.png",
+    "shy": "E:/CodexState/generated_images/01a123cb-c7ec-7891-b65b-4635d47ee622/exec-a568ab75-a9be-4031-a7ad-fed7cb121d07.png",
+    "sleepy": "E:/CodexState/generated_images/01a123cb-c7ec-7891-b65b-4635d47ee622/exec-24590db3-acdc-4702-81d9-d701d28fd50a.png"
+  },
+  "layout": "每组4列2行，8个连续播放帧，统一640x800画布；具体帧时长以manifest.json为准",
+  "packaging": "按真实Alpha连通域提取角色，统一每组的裁切和缩放，保留动作本身的位移。不是逐帧自动居中或缩放。",
+  "waveCorrection": {
+    "source": "E:/CodexState/generated_images/01a123cb-c7ec-7891-b65b-4635d47ee622/exec-926004ea-fb16-4948-a9c7-f812933c9360.png",
+    "reference": "wave/frame-02.png",
+    "usedAt": [
+      3,
+      5
+    ],
+    "processing": "只生成同一只手向外摆动的关键帧，按原帧身高和脚部锚点对齐。替换图集中错误换手的两个帧。"
+  },
+  "stabilization": {
+    "method": "落脚点与头身比例校正；站立动作固定下半身；RIFE同步变换预乘RGBA，30fps中间帧；共同中性姿态衔接；左右转身独立过渡",
+    "model": "RIFE 4.25 lite",
+    "modelSource": "https://github.com/hzwer/Practical-RIFE",
+    "modelWeights": "https://drive.google.com/file/d/1zlKblGuKNatulJNFf5jdB-emp9AqGK05/view",
+    "license": "MIT，模型只在离线制作阶段使用",
+    "tools": [
+      "tools/motion/RepairFrames.cs",
+      "tools/motion/interpolate_clip.py",
+      "tools/motion/audit_stability.py"
+    ],
+    "output": "smooth/",
+    "validation": "app/native-qa/stability.json"
+  }
+}

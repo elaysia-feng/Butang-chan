@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-11",
+  "tool": "built-in image_gen",
+  "references": ["F:/myInterestingProgram/不糖酱/01_reference/inputs/ref1_character.png", "F:/myInterestingProgram/不糖酱/01_reference/inputs/ref3_turnaround.png", "assets/motions/smooth/idle/frame-000.png"],
+  "sources": {
+    "lift": "E:/CodexState/generated_images/01a123cb-c7ec-7891-b65b-4635d47ee622/exec-e8c8d85d-7de7-4e28-9d1f-618c7de0eff7.png",
+    "climb": "E:/CodexState/generated_images/01a123cb-c7ec-7891-b65b-4635d47ee622/exec-2b5090f8-d6dd-4c1a-ba1c-20c589ee21cc.png"
+  },
+  "savedAtlases": ["assets/motions/lift/atlas.png", "assets/motions/climb/atlas.png"],
+  "commonPrompt": "Create a production 2D desktop-pet animation sprite atlas, exactly 4 columns by 2 rows, eight equal cells on a genuinely transparent background. All eight sprites full body, same anime character from the references, identical head and body proportions, clothing and hair silhouette, SAME character scale and anchor in every cell, ample transparent gutter. Reference 1 and 2 establish original design, reference 3 is the EXISTING sprite to match closely, use its front-facing rendering and proportion. Dark brown to lavender curly twin tails, blue eyes, pink black layered lace dress, blue heart chest jewel, long pink ribbon tails, black stocking on viewer LEFT leg, pale pink patterned stocking on viewer RIGHT, black platform shoes. No grid, labels, shadow, hands of another person, objects or background. Crisp transparent edges.",
+  "actionPrompts": {
+    "lift": " Action sequence in reading order: being gently lifted by the desktop cursor (cursor invisible), front view. Frame1 same neutral standing posture as reference3; frame2 shoulders lift slightly, hands start raising out; frame3 arms softly extended to sides, knees bend slightly; frames4-7 suspended with gently bent knees and relaxed outward hands, very subtle coherent dangling leg movement, shy surprised face; frame8 returns to the same suspended posture as frame4. Keep crown anchor constant. Anatomically natural, modest dress unchanged, no giant movement, no outfit redesign.",
+    "climb": " Action sequence in reading order: climbing an invisible vertical wall on viewer RIGHT, still three-quarter FRONT view with face visible. Both hands reach towards right wall, alternating hand grip and modest knee lifts. Frame1 right hand up left hand chest height, left black-stocking knee slightly lifted; frame2 weight shifts rightward; frame3 left hand reaches up, right pink-stocking knee slightly lifted; frame4 right foot pushes; frames5-8 smoothly repeat the same alternating climbing step, frame8 approaches frame1 for a loop. Keep torso/crown centered at identical positions, limbs move only slightly. Full character head-to-shoes always visible. No visible wall, no 90-degree body rotation, no costume change."
+  },
+  "processing": "AtlasPack 按 Alpha 提取八帧；RepairFrames 统一画布与首帧锚点，保留膝盖动作；RIFE 4.25 lite 对预乘 RGBA 制作连续中间帧和共同中性进出场。提起循环使用睁眼的3、5、7号帧，爬墙循环使用0至3号帧，避免表情大幅变化。",
+  "runtime": "只播放透明PNG，不加载Python、Torch或RIFE模型；最近80帧缓存。"
+}

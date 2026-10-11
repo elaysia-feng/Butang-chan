@@ -1,0 +1,10 @@
+{
+  "tool": "built-in image_gen",
+  "referenceImages": ["../01_reference/inputs/ref1_character.png", "../01_reference/inputs/ref2_expression.png", "../01_reference/inputs/ref3_turnaround.png", "../01_reference/inputs/ref4_details.png"],
+  "sourceImage": "reference-atlas-v2.png",
+  "generatedSource": "E:/CodexState/generated_images/01a123cb-c7ec-7891-b65b-4635d47ee622/exec-d486e736-1822-49aa-bad1-0b1fd2318faf.png",
+  "layout": { "columns": 3, "rows": 2, "width": 1254, "height": 1254, "cellWidth": 418, "cellHeight": 627 },
+  "frames": ["idle", "blink", "talk", "wink", "shy", "sleepy"],
+  "packaging": "按独立单元格提取，裁去透明留白，等比缩放至640px高，底部对齐400x660透明画布。保留原始Alpha。",
+  "rejectedSource": "第一版图集角色跨越格子边界，导致右侧袖子截断及下一排头顶混入，不作为交付素材。"
+}

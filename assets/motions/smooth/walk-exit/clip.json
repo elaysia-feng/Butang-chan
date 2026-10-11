@@ -1,0 +1,34 @@
+{
+  "frames": [
+    "frame-000.png",
+    "frame-001.png",
+    "frame-002.png",
+    "frame-003.png",
+    "frame-004.png",
+    "frame-005.png",
+    "frame-006.png",
+    "frame-007.png",
+    "frame-008.png",
+    "frame-009.png",
+    "frame-010.png"
+  ],
+  "durations": [
+    33,
+    33,
+    33,
+    33,
+    33,
+    33,
+    33,
+    33,
+    33,
+    33,
+    33
+  ],
+  "loop": false,
+  "size": [
+    320,
+    400
+  ],
+  "model": "RIFE 4.25 lite"
+}

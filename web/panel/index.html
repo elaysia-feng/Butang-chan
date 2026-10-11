@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>不糖酱 · 陪伴</title>
+  <link rel="stylesheet" href="panel.css">
+</head>
+<body>
+  <main class="shell compact">
+    <header class="cover">
+      <div class="avatar"><img src="./assets/idle.png" alt=""></div>
+      <div class="identity"><h1>不糖酱</h1><p>今天，也在你身边。</p></div>
+      <button id="expand-panel" aria-label="展开工具与历史">展开</button>
+      <button id="close" class="icon-close" aria-label="收起面板"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 7 10 10M17 7 7 17"/></svg></button>
+    </header>
+    <nav aria-label="面板功能"><button data-view="talk" class="selected">消息</button><button data-view="appearance">外观</button><button data-view="tools">工具</button><button data-view="vision">视野</button><button data-view="settings">设置</button></nav>
+    <section id="talk" class="view">
+      <div id="messages" role="log" aria-label="消息列表"></div>
+      <article id="detail" hidden><div class="detail-head"><button id="back">返回消息</button><span id="detail-author"></span></div><div id="detail-text" tabindex="0"></div></article>
+      <form id="composer"><textarea id="input" rows="2" aria-label="消息内容" placeholder="今天有什么想告诉我的？" maxlength="12000"></textarea><button id="send" type="submit">发送</button></form>
+      <div id="attachment" hidden>已附上画面 <button id="remove-image">移除</button></div>
+      <div class="reply-controls"><span id="busy" hidden>正在回复…</span><button id="interrupt" hidden>停止回复</button></div>
+      <div class="footnote">Enter 发送 · Shift + Enter 换行</div>
+    </section>
+    <section id="appearance" class="view" hidden>
+      <div class="size-preview"><img id="size-pet" src="./assets/idle.png" alt="不糖酱角色大小预览"><span class="size-floor"></span></div>
+      <div class="actions" aria-label="播放动作"><button data-action="6">挥挥手</button><button data-action="7">开心</button><button data-action="8">害羞</button><button data-action="9">困啦</button><button data-action="10">走两步</button></div>
+      <div class="size-title"><label for="size">桌宠大小</label><output id="size-value">35%</output></div>
+      <input id="size" type="range" min="20" max="150" step="1" value="35">
+      <div class="presets"><button data-size="35">小巧</button><button data-size="55">适中</button><button data-size="80">大一点</button></div>
+      <p class="help">拖动实时预览，松开自动记住。<br>按住角色可以自由移动。</p>
+      <div class="switch-row"><label for="wander">自己溜达</label><input id="wander" class="switch" type="checkbox" role="switch"></div>
+      <p class="help quiet">关闭时，她会留在你放置的位置。</p>
+      <div class="switch-row"><label for="inputReactions">回应键鼠与手柄操作</label><input id="inputReactions" class="switch" type="checkbox" role="switch"></div>
+      <p class="help quiet">轻轻回应，不记录输入的文字。</p>
+      <div class="switch-row"><label for="climb">沿屏幕边缘爬行</label><input id="climb" class="switch" type="checkbox" role="switch"></div>
+      <button id="climb-now" class="secondary">现在爬一小段</button>
+    </section>
+    <section id="tools" class="view" hidden>
+      <div class="tool-tabs" aria-label="工具类别"><button data-tool="reminders" class="selected">提醒</button><button data-tool="tasks">任务</button><button data-tool="plugins">插件</button></div>
+      <div id="reminders" class="tool-content">
+        <div class="focus-presets"><button data-pomodoro="25" class="secondary">专注 25 分钟</button><button data-pomodoro="5" class="secondary">休息 5 分钟</button><button data-pomodoro="0" class="secondary">停止计时</button></div>
+        <button id="reminder-add-toggle" class="secondary" aria-expanded="false">添加提醒</button>
+        <div id="reminder-list" class="feature-list" aria-live="polite"></div>
+        <form id="reminder-form" hidden><label class="field">提醒我什么<input id="reminder-text" maxlength="500" placeholder="喝水、开会、去散步…" required></label>
+          <label class="field">什么时候<input id="reminder-due" type="datetime-local" required></label>
+          <label class="field">重复<select id="reminder-repeat"><option value="0">仅一次</option><option value="30">每 30 分钟</option><option value="60">每小时</option><option value="1440">每天</option></select></label>
+          <button class="primary" type="submit">记住这个提醒</button></form>
+      </div>
+      <div id="tasks" class="tool-content" hidden><p class="help">外部任务的进度和结果会出现在这里。</p><div id="task-list" class="feature-list" aria-live="polite"></div></div>
+      <div id="plugins" class="tool-content" hidden><p class="help">启用你需要的小工具，也可以添加自己的插件。</p><button id="reload-plugins" class="secondary">重新加载插件</button><div id="plugin-list" class="feature-list"></div></div>
+    </section>
+    <section id="vision" class="view" hidden>
+      <p class="help">选一张画面，我陪你看看。预览后再发送。</p>
+      <div class="capture-actions"><button id="capture-screen" class="secondary">截取当前屏幕</button><button id="camera-start" class="secondary">打开摄像头</button><button id="camera-stop" class="secondary" hidden>关闭摄像头</button></div>
+      <video id="camera" autoplay muted playsinline hidden></video><button id="camera-shot" class="secondary" hidden>拍下这张画面</button>
+      <div id="vision-preview" hidden></div>
+      <p id="vision-status" role="status">还没有选择画面。</p>
+      <label class="field">想问她什么<textarea id="vision-question" rows="2" placeholder="这个画面里有什么？"></textarea></label>
+      <button id="vision-send" class="primary" disabled>带着画面问她</button>
+    </section>
+    <section id="settings" class="view" hidden>
+      <form id="settings-form">
+        <label class="field">接口地址<input id="baseUrl" type="url" placeholder="https://…/v1" required></label>
+        <label class="field">模型<input id="model" type="text" placeholder="模型名称" required></label>
+        <label class="field">识图模型<input id="visionModel" type="text" placeholder="留空使用上面的模型"></label>
+        <label class="field">API Key <span id="key-status">仅存本机</span><input id="key" type="password" autocomplete="off" placeholder="留空保留现有密钥"></label>
+        <label class="field">她的性格<textarea id="persona" rows="3"></textarea></label>
+        <div class="switch-row"><label for="topMost">始终置顶</label><input id="topMost" class="switch" type="checkbox" role="switch"></div>
+        <div class="switch-row"><label for="clickThrough">鼠标穿透</label><input id="clickThrough" class="switch" type="checkbox" role="switch"></div>
+        <div class="switch-row"><label for="hourlyChime">整点提醒</label><input id="hourlyChime" class="switch" type="checkbox" role="switch"></div>
+        <div class="switch-row"><label for="autoStart">开机启动</label><input id="autoStart" class="switch" type="checkbox" role="switch"></div>
+        <button class="primary" type="submit">保存设置</button><p id="save-status" role="status"></p>
+      </form>
+      <button id="clear" class="text-danger">清空聊天记忆</button>
+    </section>
+    <div id="toast" role="status" hidden></div>
+  </main>
+  <script src="panel.js"></script>
+</body>
+</html>

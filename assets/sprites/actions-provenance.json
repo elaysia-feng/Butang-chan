@@ -1,0 +1,9 @@
+{
+  "tool": "built-in image_gen",
+  "references": ["../../01_reference/inputs/ref1_character.png", "../../01_reference/inputs/ref3_turnaround.png", "../../01_reference/inputs/ref4_details.png"],
+  "source": "actions-atlas.png",
+  "generatedSource": "E:/CodexState/generated_images/01a123cb-c7ec-7891-b65b-4635d47ee622/exec-41c0dbf4-88db-43ff-8813-48d58d4efc35.png",
+  "layout": { "width": 1254, "height": 1254, "columns": 2, "rows": 2, "cellWidth": 627, "cellHeight": 627 },
+  "frames": ["wave", "cheer", "bashful", "yawn"],
+  "packaging": "逐格提取、去除透明留白、等比缩放到640px高、底部对齐540x660透明画布。动作帧更宽，渲染按各自宽高比绘制，防止袖子被截断。"
+}

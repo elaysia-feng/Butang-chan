@@ -1,0 +1,185 @@
+{
+  "format": 1,
+  "canvas": {
+    "width": 640,
+    "height": 800
+  },
+  "clips": {
+    "idle": {
+      "frames": [
+        "idle/frame-00.png",
+        "idle/frame-01.png",
+        "idle/frame-02.png",
+        "idle/frame-03.png",
+        "idle/frame-04.png",
+        "idle/frame-05.png",
+        "idle/frame-06.png",
+        "idle/frame-07.png"
+      ],
+      "durations": [
+        650,
+        500,
+        400,
+        70,
+        90,
+        70,
+        500,
+        650
+      ],
+      "loop": true
+    },
+    "wave": {
+      "frames": [
+        "wave/frame-00.png",
+        "wave/frame-01.png",
+        "wave/frame-02.png",
+        "wave/frame-03.png",
+        "wave/frame-04.png",
+        "wave/frame-05.png",
+        "wave/frame-06.png",
+        "wave/frame-07.png"
+      ],
+      "durations": [
+        135,
+        135,
+        135,
+        135,
+        135,
+        135,
+        135,
+        135
+      ],
+      "loop": false
+    },
+    "walk": {
+      "frames": [
+        "walk/frame-00.png",
+        "walk/frame-01.png",
+        "walk/frame-02.png",
+        "walk/frame-03.png",
+        "walk/frame-04.png",
+        "walk/frame-05.png",
+        "walk/frame-06.png",
+        "walk/frame-07.png"
+      ],
+      "durations": [
+        110,
+        110,
+        110,
+        110,
+        110,
+        110,
+        110,
+        110
+      ],
+      "loop": true
+    },
+    "cheer": {
+      "frames": [
+        "cheer/frame-00.png",
+        "cheer/frame-01.png",
+        "cheer/frame-02.png",
+        "cheer/frame-03.png",
+        "cheer/frame-04.png",
+        "cheer/frame-05.png",
+        "cheer/frame-06.png",
+        "cheer/frame-07.png"
+      ],
+      "durations": [
+        150,
+        120,
+        140,
+        100,
+        130,
+        100,
+        160,
+        220
+      ],
+      "loop": false
+    },
+    "talk": {
+      "frames": [
+        "talk/frame-00.png",
+        "talk/frame-01.png",
+        "talk/frame-02.png",
+        "talk/frame-03.png",
+        "talk/frame-04.png",
+        "talk/frame-05.png",
+        "talk/frame-06.png",
+        "talk/frame-07.png"
+      ],
+      "durations": [
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120
+      ],
+      "loop": true
+    },
+    "shy": {
+      "frames": [
+        "shy/frame-00.png",
+        "shy/frame-01.png",
+        "shy/frame-02.png",
+        "shy/frame-03.png",
+        "shy/frame-04.png",
+        "shy/frame-05.png",
+        "shy/frame-06.png",
+        "shy/frame-07.png"
+      ],
+      "durations": [
+        160,
+        160,
+        160,
+        160,
+        160,
+        160,
+        160,
+        160
+      ],
+      "loop": false
+    },
+    "sleepy": {
+      "frames": [
+        "sleepy/frame-00.png",
+        "sleepy/frame-01.png",
+        "sleepy/frame-02.png",
+        "sleepy/frame-03.png",
+        "sleepy/frame-04.png",
+        "sleepy/frame-05.png",
+        "sleepy/frame-06.png",
+        "sleepy/frame-07.png"
+      ],
+      "durations": [
+        220,
+        220,
+        180,
+        180,
+        260,
+        180,
+        220,
+        300
+      ],
+      "loop": false
+    },
+    "blink": {
+      "frames": [
+        "idle/frame-03.png",
+        "idle/frame-04.png",
+        "idle/frame-05.png",
+        "idle/frame-07.png"
+      ],
+      "durations": [
+        60,
+        90,
+        70,
+        130
+      ],
+      "loop": false
+    }
+  }
+}

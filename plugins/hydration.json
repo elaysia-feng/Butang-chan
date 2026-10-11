@@ -1,0 +1,8 @@
+{
+  "id": "hydration",
+  "name": "喝水小提醒",
+  "description": "每 60 分钟提醒喝口水，也可以手动运行一次。",
+  "intervalMinutes": 60,
+  "text": "喝口水吧，我陪你休息一小会儿。",
+  "motion": "wave"
+}

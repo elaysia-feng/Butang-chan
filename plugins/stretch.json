@@ -1,0 +1,8 @@
+{
+  "id": "stretch",
+  "name": "伸个懒腰",
+  "description": "每 45 分钟提醒放松肩颈，默认关闭。",
+  "intervalMinutes": 45,
+  "text": "肩膀放松，站起来伸个懒腰吧。",
+  "motion": "cheer"
+}

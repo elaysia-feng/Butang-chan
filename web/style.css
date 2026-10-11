@@ -1,0 +1,233 @@
+/* 不糖酱桌宠。所有颜色都贴着角色本体的配色：紫粉头发 + 蓝眼睛，
+   不用通用桌宠的粉色系，免得和角色本身的颜色打架。 */
+
+:root {
+  --ink: #2c2233;
+  --hair: #4a3350;
+  --hair-soft: #6b4a72;
+  --ribbon: #eaa5d0;
+  --eye: #6fb3e8;
+  --panel: #fffcfd;
+  --line: rgba(120, 88, 130, .28);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0; padding: 0;
+  width: 100%; height: 100%;
+  background: transparent;
+  overflow: hidden;
+  font: 14px/1.6 "Microsoft YaHei UI", "Microsoft YaHei", sans-serif;
+  color: var(--ink);
+  -webkit-user-select: none; user-select: none;
+  cursor: default;
+}
+
+/* 舞台贴底，上面留出对话卡片的高度。卡片收起时那片区域被裁掉。 */
+#stage {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: var(--stage-h, 284px);
+}
+#stage canvas { display: block; }
+
+/* ── 气泡 ───────────────────────────────────────────── */
+/* 气泡的"形状"必须和窗口裁剪区域完全一致，否则框内多出来的地方
+   会露出窗体的黑色底色，看起来就是一圈黑边。
+   所以：不用外发光（它必然溢到圆角矩形之外），改用描边和更实的底色。 */
+.bubble {
+  position: absolute;
+  left: 50%; top: 12px;
+  transform: translateX(-50%);
+  max-width: calc(100% - 28px);
+  min-width: 90px;
+  padding: 9px 13px;
+  background: var(--panel);
+  border: 2px solid var(--hair-soft);
+  border-radius: 14px;
+  font-size: 13.5px;
+  line-height: 1.55;
+  z-index: 5;
+  font-family: inherit;
+  color: var(--ink);
+  cursor: pointer;
+  text-align: left;
+  word-break: break-word;
+}
+.bubble[hidden] { display: none; }
+
+
+/* ── 对话卡片 ───────────────────────────────────────────
+   不是"把窗口撑大"，而是一张固定尺寸的小卡片浮在她头顶。
+   窗口一直按「卡片 + 角色」的高度开着；卡片收起时，窗口裁剪区域里
+   根本没有它那块——所以既看不见，也点不到，桌面照常用。
+   ──────────────────────────────────────────────────────── */
+#chat {
+  position: absolute;
+  left: 50%; top: 8px;
+  transform: translateX(-50%);
+  width: calc(100% - 22px);
+  height: min(360px, calc(100% - var(--stage-h, 284px) - 20px));
+  display: flex; flex-direction: column;
+  background: var(--panel);
+  border: 2px solid var(--hair-soft);
+  border-radius: 14px;
+  overflow: hidden;
+  z-index: 4;
+  transform-origin: 50% 100%;
+
+}
+#chat[hidden] { display: none; }
+
+
+#chat-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 6px 9px;
+  background: linear-gradient(180deg, #fdf2f8, #f7e4f1);
+  border-bottom: 1px solid var(--line);
+  flex: 0 0 auto;
+}
+#chat-head .title { font-weight: 700; color: var(--hair); font-size: 12.5px; }
+
+.tabs { display: flex; gap: 4px; }
+.tab {
+  font: inherit; font-size: 11.5px;
+  padding: 2px 8px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: #fff; color: var(--hair);
+  cursor: pointer;
+}
+.tab.on { background: var(--ribbon); border-color: var(--hair-soft); color: var(--ink); }
+#chat-close { font-size: 14px; line-height: 1; padding: 1px 8px; }
+
+.pane { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; }
+.pane[hidden] { display: none; }
+
+#msgs {
+  flex: 1 1 auto; min-height: 0;
+  overflow-y: auto;
+  padding: 8px 9px;
+  display: flex; flex-direction: column; gap: 6px;
+  -webkit-user-select: text; user-select: text;
+}
+.msg {
+  max-width: 88%;
+  padding: 6px 9px;
+  border-radius: 10px;
+  font-size: 13px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.msg.user {
+  align-self: flex-end;
+  background: var(--eye);
+  color: #10304a;
+  border-bottom-right-radius: 3px;
+}
+.msg.bot {
+  align-self: flex-start;
+  background: #fbeef8;
+  border: 1px solid rgba(190, 140, 180, .35);
+  border-bottom-left-radius: 3px;
+}
+.msg.err {
+  align-self: flex-start;
+  background: #fdeaea;
+  border: 1px solid rgba(200, 110, 110, .4);
+  color: #8a2f2f;
+}
+.msg .caret {
+  display: inline-block; width: 7px;
+  border-bottom: 2px solid var(--hair);
+  animation: blink 1s steps(2, start) infinite;
+  vertical-align: middle;
+}
+@keyframes blink { 50% { opacity: 0; } }
+
+#composer {
+  flex: 0 0 auto;
+  display: flex; gap: 5px;
+  padding: 7px;
+  border-top: 1px solid var(--line);
+  background: #fdf7fb;
+}
+#input {
+  flex: 1 1 auto; min-width: 0;
+  font: inherit; font-size: 13px;
+  padding: 6px 9px;
+  border: 1.5px solid var(--line);
+  border-radius: 8px;
+  background: #fff; color: var(--ink);
+  -webkit-user-select: text; user-select: text;
+}
+#input:focus { outline: none; border-color: var(--ribbon); }
+#send {
+  flex: 0 0 auto;
+  font: inherit; font-size: 13px;
+  padding: 7px 13px;
+  border: none; border-radius: 9px;
+  background: var(--hair-soft); color: #fff;
+  cursor: pointer;
+}
+#send:hover { background: var(--hair); }
+#send:disabled { opacity: .5; cursor: default; }
+
+/* ── 设置 ───────────────────────────────────────────── */
+#pane-set { overflow-y: auto; padding: 11px; gap: 9px; -webkit-user-select: text; user-select: text; }
+#pane-set label { display: block; font-size: 12.5px; color: var(--hair); }
+#pane-set input[type=text], #pane-set input[type=password], #pane-set textarea {
+  width: 100%; margin-top: 3px;
+  font: inherit; font-size: 12.5px;
+  padding: 6px 8px;
+  border: 1.5px solid var(--line);
+  border-radius: 7px;
+  background: #fff; color: var(--ink);
+  resize: vertical;
+}
+#pane-set input:focus, #pane-set textarea:focus { outline: none; border-color: var(--ribbon); }
+#pane-set .row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+#pane-set .inline { display: flex; align-items: center; gap: 4px; font-size: 12.5px; }
+#pane-set .hint { font-size: 11.5px; color: #8a7292; min-height: 16px; }
+#pane-set button {
+  font: inherit; font-size: 13px;
+  padding: 6px 14px;
+  border: none; border-radius: 8px;
+  background: var(--hair-soft); color: #fff; cursor: pointer;
+}
+#pane-set button.danger { background: #a34242; }
+
+/* ── 番茄钟小挂件 ───────────────────────────────────── */
+#badge {
+  position: absolute;
+  right: 8px; bottom: 6px;
+  padding: 4px 9px;
+  background: #4c3350;
+  color: #fff;
+  border-radius: 9px;
+  font: 600 12px/1.4 Consolas, monospace;
+  letter-spacing: .5px;
+  z-index: 6;
+  pointer-events: none;
+}
+#badge[hidden] { display: none; }
+
+/* 摘要卡片纵向堆叠，全文在同一面板内阅读。 */
+#msgs[hidden], #message-detail[hidden] { display: none; }
+.msg { flex: 0 0 auto; width: 100%; max-width: 100%; text-align: left; font-family: inherit; color: var(--ink); border: 1px solid var(--line); cursor: pointer; }
+.msg-label { display: block; margin-bottom: 3px; font-size: 11px; font-weight: 600; color: var(--hair); }
+.msg-preview { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; white-space: pre-wrap; }
+.msg.user { background: #e3f1fc; border-radius: 10px; }
+.msg.bot { border-radius: 10px; }
+.msg:hover { border-color: var(--hair-soft); }
+#message-detail { display: flex; flex-direction: column; flex: 1; min-height: 0; padding: 10px; gap: 8px; }
+#detail-back { align-self: flex-start; font: inherit; font-size: 12px; color: var(--hair); background: #fbeef8; border: 1px solid var(--line); border-radius: 7px; cursor: pointer; padding: 3px 8px; }
+#detail-author { font-size: 12px; color: var(--hair); }
+#detail-text { flex: 1; min-height: 0; overflow: auto; white-space: pre-wrap; overflow-wrap: anywhere; user-select: text; }
+#bubble-text { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; }
+button:focus-visible, #detail-text:focus-visible { outline: 2px solid var(--hair-soft); outline-offset: -3px; }
+::selection { background: #eaa5d0; color: #2c2233; }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-thumb { background: #b598bc; border-radius: 4px; }

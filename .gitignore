@@ -1,0 +1,89 @@
+# 桌宠打包目录包含运行配置、聊天记录、浏览器缓存和验收截图。
+/app/
+/data/
+/logs/
+/tmp/
+/temp/
+
+# 密钥与本机环境；仅保留无真实凭据的配置模板。
+secret.json
+secrets.json
+.env
+.env.*
+!.env.example
+!.env.template
+*.pem
+*.key
+*.p12
+*.pfx
+
+# .NET 构建缓存；vendor 中的 WebView2 DLL 是当前构建必需依赖，保留提交。
+**/bin/
+**/obj/
+.vs/
+*.user
+*.suo
+*.pdb
+*.exe
+
+# Python 环境、测试与类型检查缓存。
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+*.egg-info/
+
+# 前端依赖与构建缓存，保留源码和依赖锁文件。
+node_modules/
+dist/
+build/
+coverage/
+.next/
+.vite/
+.cache/
+
+# 本机知识库数据库、向量索引及模型权重。
+*.db
+*.db-shm
+*.db-wal
+*.db-journal
+*.sqlite
+*.sqlite3
+*.sqlite-journal
+*.sqlite-shm
+*.sqlite-wal
+*.sqlite3-shm
+*.sqlite3-wal
+*.faiss
+*.safetensors
+*.gguf
+*.onnx
+*.pt
+*.pth
+*.pkl
+.chroma/
+chroma_db/
+
+# 动画制作中间结果与下载模型；assets 中的运行素材仍需提交。
+/tools/motion/prepared/
+/tools/motion/rife/model.zip
+/tools/motion/rife/model/
+
+# 旧版本备份只保留动画稳定性验收所需的清单。
+/legacy/*
+!/legacy/motions-hard-cuts.json
+
+# 临时文件与系统元数据。
+*.log
+*.tmp
+*.bak
+.DS_Store
+Thumbs.db
+Desktop.ini

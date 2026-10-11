@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>不糖酱 · 桌宠</title>
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+<!-- 桌宠形态：头顶一块气泡 + 底部舞台 -->
+<button type="button" id="bubble" class="bubble" hidden title="点击查看全文"><span id="bubble-text"></span></button>
+
+<!-- 聊天形态：对话面板占上方，角色仍在下方 -->
+<section id="chat" hidden>
+  <header id="chat-head">
+    <span class="title">不糖酱</span>
+    <div class="tabs">
+      <button type="button" class="tab on" data-tab="talk">聊天</button>
+      <button type="button" class="tab" data-tab="set">设置</button>
+      <button type="button" class="tab" id="chat-close" title="收起">×</button>
+    </div>
+  </header>
+
+  <div id="pane-talk" class="pane">
+    <div id="msgs"></div>
+    <div id="message-detail" hidden>
+      <button type="button" id="detail-back">返回消息</button>
+      <strong id="detail-author"></strong>
+      <div id="detail-text" tabindex="0"></div>
+    </div>
+    <div id="composer">
+      <input id="input" type="text" autocomplete="off" placeholder="跟不糖酱说点什么…">
+      <button type="button" id="send">发送</button>
+    </div>
+  </div>
+
+  <div id="pane-set" class="pane" hidden>
+    <label>接口地址
+      <input id="cfg-baseUrl" type="text" spellcheck="false">
+    </label>
+    <label>模型
+      <input id="cfg-model" type="text" spellcheck="false">
+    </label>
+    <label>API Key（存在本机 secret.json，不会上传）
+      <input id="cfg-key" type="password" spellcheck="false" placeholder="留空表示不改">
+    </label>
+    <label>角色人设
+      <textarea id="cfg-persona" rows="4"></textarea>
+    </label>
+    <div class="row">
+      <label class="inline"><input type="checkbox" id="cfg-wander"> 会自己溜达</label>
+      <label class="inline"><input type="checkbox" id="cfg-hourly"> 整点报时</label>
+    </div>
+    <div class="row">
+      <label class="inline"><input type="checkbox" id="cfg-topmost"> 始终置顶</label>
+      <label class="inline"><input type="checkbox" id="cfg-through"> 鼠标穿透</label>
+    </div>
+    <div class="hint" id="cfg-status"></div>
+    <div class="row">
+      <button type="button" id="cfg-save">保存</button>
+      <button type="button" id="cfg-clear" class="danger">清空记忆</button>
+    </div>
+  </div>
+</section>
+
+<div id="stage"></div>
+<div id="badge" hidden></div>
+
+<!-- 依赖全部来自项目内的 09_web/vendor，和直播预览用的是同一套文件 -->
+<script src="../../09_web/vendor/live2dcubismcore.min.js"></script>
+<script src="../../09_web/vendor/pixi.min.js"></script>
+<script src="../../09_web/vendor/pixi-live2d-display.cubism4.min.js"></script>
+
+<script src="./lines.js"></script>
+<script src="./pet.js"></script>
+<script src="./app.js"></script>
+</body>
+</html>
